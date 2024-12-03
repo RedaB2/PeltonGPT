@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Input Parameters</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Provide Experiment Parameters 🚀</h1>
+    <form id="parameters-form">
+        <label for="flow-rate">🌊 Flow Rate:</label>
+        <input type="number" id="flow-rate" name="flow-rate" required>
+
+        <label for="nozzle-diameter">🔧 Nozzle Diameter:</label>
+        <input type="number" id="nozzle-diameter" name="nozzle-diameter" required>
+
+        <label for="distance">📏 Distance Between Nozzle and Turbine:</label>
+        <input type="number" id="distance" name="distance" required>
+
+        <button type="submit">✨ Generate AI Function ✨</button>
+    </form>
+
+    <script>
+        document.getElementById('parameters-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const parameters = {
+                flowRate: parseFloat(document.getElementById('flow-rate').value),
+                nozzleDiameter: parseFloat(document.getElementById('nozzle-diameter').value),
+                distance: parseFloat(document.getElementById('distance').value)
+            };
+
+            console.log('Storing parameters:', parameters);
+
+            sessionStorage.setItem('experimentParameters', JSON.stringify(parameters));
+            window.location.href = '/loading/';
+        });
+    </script>
+</body>
+</html>

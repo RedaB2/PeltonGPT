@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Loading...</title>
+    <style>
+        #turbine {
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculating Parameters...</h1>
+    <img id="turbine" src="../../static/images/pelton.png" alt="Rotating Turbine">
+    <script>
+        setTimeout(() => {
+            window.location.href = '/results/';
+        }, 10000); // Simulate a delay for calculation
+    </script>
+</body>
+</html>

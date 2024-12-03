@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Results</title>
+</head>
+<body>
+    <h1>Experiment Results</h1>
+    <div id="results">
+        <!-- Results will be populated here dynamically -->
+    </div>
+    <button id="generate-review">Generate AI Review</button>
+
+    <div id="review-section" style="display:none;">
+        <h2>AI Review</h2>
+        <p id="ai-review"></p>
+        <img id="ai-image" alt="AI-generated Pelton Turbine">
+    </div>
+
+    <script>
+        // Fetch and display the results
+        document.addEventListener('DOMContentLoaded', async function() {
+            const parameters = JSON.parse(sessionStorage.getItem('experimentParameters'));
+            const description = sessionStorage.getItem('experimentDescription');
+            
+            console.log('Description:', description);
+            console.log('Parameters:', parameters);
+            
+            try {
+                // Call your backend API
+                const response = await fetch('/api/calculate/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ description, parameters })
+                });
+
+                console.log('Response status:', response.status);
+
+                if (response.ok) {
+                    const results = await response.json();
+                    console.log('Results:', results);
+                    const resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = `
+                        <p>Bucket Depth: ${results.bucket_depth}</p>
+                        <p>Bucket Angle: ${results.bucket_angle}</p>
+                        <p>Bucket Spacing: ${results.bucket_spacing}</p>
+                        <p>Nozzle Alignment: ${results.nozzle_alignment}</p>
+                    `;
+                } else {
+                    const errorText = await response.text();
+                    console.error('Error fetching results:', errorText);
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        });
+
+        // Generate AI review and image
+        document.getElementById('generate-review').addEventListener('click', async function() {
+            const response = await fetch('/api/generate-review/', { method: 'GET' });
+            const reviewData = await response.json();
+
+            document.getElementById('ai-review').textContent = reviewData.review;
+            document.getElementById('ai-image').src = reviewData.imageUrl;
+            document.getElementById('review-section').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

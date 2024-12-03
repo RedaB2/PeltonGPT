@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pelton Turbine Analysis</title>
+    <link rel="stylesheet" href="../../static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Powered Pelton Turbine 🧑🏽‍💻</h1>
+        <form id="description-form">
+            <label for="experiment-description">What does this experiment look like?</label><br>
+            <textarea id="experiment-description" name="experiment-description" required></textarea><br>
+            <button type="submit">Next</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('description-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const description = document.getElementById('experiment-description').value;
+            sessionStorage.setItem('experimentDescription', description);
+            window.location.href = '/step2/';
+        });
+    </script>
+</body>
+</html>

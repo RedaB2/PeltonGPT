@@ -1,0 +1,81 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Maintained from your styles */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Header styling */
+h1 {
+    font-size: 2em; /* Maintained from your styles */
+    margin-bottom: 20px;
+    color: #2c3e50; /* Harmonized with modern styles */
+}
+
+/* Form container styling */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Maintained from your styles */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Label styling */
+label {
+    font-size: 1em; /* Maintained from your styles */
+    margin-bottom: 10px;
+    display: block;
+    font-weight: bold; /* Added for emphasis */
+    color: #34495e; /* Harmonized with modern styles */
+}
+
+/* Input field styling */
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em; /* Maintained from your styles */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* Textarea-specific styling */
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Button styling */
+button {
+    background-color: #007bff; /* Maintained from your styles */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3; /* Maintained from your styles */
+}
+
+/* Emoji-enhanced labels */
+label::after {
+    content: ' 🚀'; /* Adds a touch of modernity to labels */
+}

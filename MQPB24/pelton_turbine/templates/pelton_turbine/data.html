@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Input Parameters</title>
+</head>
+<body>
+    <h1>Provide Experiment Parameters</h1>
+    <form id="parameters-form">
+        <label for="bucket-depth">Bucket Depth:</label>
+        <input type="number" id="bucket-depth" name="bucket-depth" required><br>
+
+        <label for="bucket-angle">Bucket Angle:</label>
+        <input type="number" id="bucket-angle" name="bucket-angle" required><br>
+
+        <label for="nozzle-diameter">Nozzle Diameter:</label>
+        <input type="number" id="nozzle-diameter" name="nozzle-diameter" required><br>
+
+        <label for="distance">Distance Between Nozzle and Turbine:</label>
+        <input type="number" id="distance" name="distance" required><br>
+
+        <button type="submit">Generate AI Function</button>
+    </form>
+
+    <script>
+        document.getElementById('parameters-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = {
+                bucketDepth: document.getElementById('bucket-depth').value,
+                bucketAngle: document.getElementById('bucket-angle').value,
+                nozzleDiameter: document.getElementById('nozzle-diameter').value,
+                distance: document.getElementById('distance').value,
+            };
+            sessionStorage.setItem('experimentParameters', JSON.stringify(data));
+            window.location.href = '/loading/';
+        });
+    </script>
+</body>
+</html>

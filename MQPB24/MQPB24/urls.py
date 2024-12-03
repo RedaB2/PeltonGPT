@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from pelton_turbine import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.welcome, name='welcome'),
+    path('step2/', views.step2, name='step2'),
+    path('loading/', views.loading, name='loading'),
+    path('results/', views.results, name='results'),
+    path('api/calculate/', views.calculate_parameters, name='calculate_parameters'),
+    path('api/generate-review/', views.generate_review, name='generate_review'),
 ]
