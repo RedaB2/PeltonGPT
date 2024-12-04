@@ -17,9 +17,11 @@
         <form id="description-form" class="center-heading">
             <label for="experiment-description" id="label">What does this experiment look like?</label><br>
             <textarea id="experiment-description" name="experiment-description" required></textarea><br>
-            <button type="submit" id="form-button">Next</button>
+            <button type="submit" id="button">Next</button>
         </form>
     </div>
+
+    <button id="translateButton" onclick="toggleLanguage()">日本語に切り替え</button>
 
     <script>
         document.getElementById('description-form').addEventListener('submit', function(e) {
@@ -60,7 +62,7 @@
         }
     </script> 
 
-    <button id="translateButton" onclick="toggleLanguage()">Japanese</button>
+    
 
     
 </body>
