@@ -3,6 +3,50 @@
 <head>
     <title>Input Parameters</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Loader styles */
+        .hidden {
+            display: none;
+        }
+
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ccc;
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #loader p {
+            font-size: 1.2em;
+            color: #333;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <h1>Provide Experiment Parameters 🚀</h1>
@@ -19,10 +63,19 @@
         <button type="submit">✨ Generate AI Function ✨</button>
     </form>
 
+    <!-- Loader -->
+    <div id="loader" class="hidden">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
     <script>
         document.getElementById('parameters-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
+            // Show the loader
+            document.getElementById('loader').classList.remove('hidden');
+
             const parameters = {
                 flowRate: parseFloat(document.getElementById('flow-rate').value),
                 nozzleDiameter: parseFloat(document.getElementById('nozzle-diameter').value),
@@ -32,7 +85,11 @@
             console.log('Storing parameters:', parameters);
 
             sessionStorage.setItem('experimentParameters', JSON.stringify(parameters));
-            window.location.href = '/loading/';
+
+            // Simulate loading delay before redirect
+            setTimeout(() => {
+                window.location.href = '/results/';
+            }, 2000); // Adjust delay time as needed
         });
     </script>
 </body>

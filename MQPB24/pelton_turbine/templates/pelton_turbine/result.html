@@ -2,6 +2,50 @@
 <html lang="en">
 <head>
     <title>Results</title>
+    <style>
+        /* Loader styles */
+        .hidden {
+            display: none;
+        }
+
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ccc;
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #loader p {
+            font-size: 1.2em;
+            color: #333;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <h1>Experiment Results</h1>
@@ -14,6 +58,12 @@
         <h2>AI Review</h2>
         <p id="ai-review"></p>
         <img id="ai-image" alt="AI-generated Pelton Turbine">
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="hidden">
+        <div class="spinner"></div>
+        <p>Loading...</p>
     </div>
 
     <script>
@@ -54,14 +104,25 @@
             }
         });
 
-        // Generate AI review and image
+        // Generate AI review and image with loader
         document.getElementById('generate-review').addEventListener('click', async function() {
-            const response = await fetch('/api/generate-review/', { method: 'GET' });
-            const reviewData = await response.json();
+            // Show the loader
+            const loader = document.getElementById('loader');
+            loader.classList.remove('hidden');
 
-            document.getElementById('ai-review').textContent = reviewData.review;
-            document.getElementById('ai-image').src = reviewData.imageUrl;
-            document.getElementById('review-section').style.display = 'block';
+            try {
+                const response = await fetch('/api/generate-review/', { method: 'GET' });
+                const reviewData = await response.json();
+
+                document.getElementById('ai-review').textContent = reviewData.review;
+                document.getElementById('ai-image').src = reviewData.imageUrl;
+                document.getElementById('review-section').style.display = 'block';
+            } catch (error) {
+                console.error('Error generating AI review:', error);
+            } finally {
+                // Hide the loader
+                loader.classList.add('hidden');
+            }
         });
     </script>
 </body>

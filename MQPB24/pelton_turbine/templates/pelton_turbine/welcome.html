@@ -3,14 +3,21 @@
 <head>
     <title>Pelton Turbine Analysis</title>
     <link rel="stylesheet" href="../../static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="image-container">
+        <img src="../../static/images/_logo_w.svg" alt="SITLogo">
+        <img src="../../static/images/WPI_logo.svg.png" alt="WPILogo">
+    </div>
     <div class="container">
-        <h1>AI Powered Pelton Turbine 🧑🏽‍💻</h1>
-        <form id="description-form">
-            <label for="experiment-description">What does this experiment look like?</label><br>
+        <h1 id="heading" class="center-heading">AI Powered Pelton Turbine 🧑🏽‍💻</h1>
+        <form id="description-form" class="center-heading">
+            <label for="experiment-description" id="label">What does this experiment look like?</label><br>
             <textarea id="experiment-description" name="experiment-description" required></textarea><br>
-            <button type="submit">Next</button>
+            <button type="submit" id="form-button">Next</button>
         </form>
     </div>
 
@@ -22,5 +29,39 @@
             window.location.href = '/step2/';
         });
     </script>
+
+    <script>
+        let currentLanguage = 'en';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ja' : 'en';
+
+            const translations = {
+                en: {
+                    heading: "AI Powered Pelton Turbine 🧑🏽‍💻",
+                    label: "What does this experiment look like?",
+                    button: "Next",
+                },
+                ja: {
+                    heading: "AIによるペルトン水車 🧑🏽‍💻",
+                    label: "この実験はどのように見えますか？",
+                    button: "次へ",
+                }
+            };
+
+            // Update text content
+            for (const [key, value] of Object.entries(translations[currentLanguage])) {
+                document.getElementById(key).textContent = value;
+            }
+
+            // Update button text
+            const button = document.getElementById('translateButton');
+            button.textContent = currentLanguage === 'en' ? '日本語に切り替え' : 'Switch to English';
+        }
+    </script> 
+
+    <button id="translateButton" onclick="toggleLanguage()">Japanese</button>
+
+    
 </body>
 </html>
