@@ -39,6 +39,7 @@ button {
     position: relative;
     overflow: hidden;
     transition: color 0.4s ease;
+    margin-top: 20px;
 }
 
 button::before {
@@ -89,3 +90,23 @@ label {
     bottom: 20px;
     right: 20px;
 }
+
+.text-container-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Space between elements in the grid */
+}
+
+#parameters-form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+    gap: 20px; /* Add space between child elements (e.g., grids and button) */
+}
+
+
+.form-item {
+    margin-bottom: 20px; /* Space between individual form items */
+}
+

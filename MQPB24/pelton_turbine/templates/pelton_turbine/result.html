@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <title>Results</title>
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
     <style>
         /* Loader styles */
         .hidden {
@@ -48,13 +52,21 @@
     </style>
 </head>
 <body>
-    <h1>Experiment Results</h1>
-    <div id="results">
+
+    <div class="image-container">
+        <img src="../../static/images/_logo_w.svg" alt="SITLogo">
+        <img src="../../static/images/WPI_logo.svg.png" alt="WPILogo">
+    </div>
+
+    <h1 id="heading" class="center-heading">Experiment Results</h1>
+    <div id="results" class="center-heading">
         <!-- Results will be populated here dynamically -->
     </div>
-    <button id="generate-review">Generate AI Review</button>
+    <div class="center-heading">
+        <button id="generate-review">Generate AI Review</button>
+    </div>
 
-    <div id="review-section" style="display:none;">
+    <div id="review-section" style="display:none;" class="center-heading">
         <h2>AI Review</h2>
         <p id="ai-review"></p>
         <img id="ai-image" alt="AI-generated Pelton Turbine">
@@ -114,7 +126,10 @@
                 const response = await fetch('/api/generate-review/', { method: 'GET' });
                 const reviewData = await response.json();
 
-                document.getElementById('ai-review').textContent = reviewData.review;
+                // Parse the Markdown into HTML before displaying
+                const aiReviewElement = document.getElementById('ai-review');
+                aiReviewElement.innerHTML = marked.parse(reviewData.review);
+
                 document.getElementById('ai-image').src = reviewData.imageUrl;
                 document.getElementById('review-section').style.display = 'block';
             } catch (error) {
@@ -125,5 +140,7 @@
             }
         });
     </script>
+    <!-- Include the marked library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>

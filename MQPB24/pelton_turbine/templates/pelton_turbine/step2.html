@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <title>Input Parameters</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap" rel="stylesheet">
     <style>
         /* Loader styles */
         .hidden {
@@ -46,21 +49,56 @@
             color: #333;
             margin: 0;
         }
+
+        /* Translate Button Styles */
+        #translateButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        #translateButton:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <h1>Provide Experiment Parameters 🚀</h1>
-    <form id="parameters-form">
-        <label for="flow-rate">🌊 Flow Rate:</label>
-        <input type="number" id="flow-rate" name="flow-rate" required>
 
-        <label for="nozzle-diameter">🔧 Nozzle Diameter:</label>
-        <input type="number" id="nozzle-diameter" name="nozzle-diameter" required>
+    <div class="image-container">
+        <img src="../../static/images/_logo_w.svg" alt="SITLogo">
+        <img src="../../static/images/WPI_logo.svg.png" alt="WPILogo">
+    </div>
 
-        <label for="distance">📏 Distance Between Nozzle and Turbine:</label>
-        <input type="number" id="distance" name="distance" required>
+    <h1 id="heading" class="center-heading">Provide Experiment Parameters 🚀</h1>
+    <form id="parameters-form" class="center-heading">
+        <div class="text-container-grid">
+            <div class="form-item">
+                <label for="flow-rate" id="flowRateLabel">🌊 Flow Rate:</label>
+                <input type="number" id="flow-rate" name="flow-rate" required>
+            </div>
+            <div class="form-item">
+                <label for="nozzle-diameter" id="nozzleDiameterLabel">🔧 Nozzle Diameter:</label>
+                <input type="number" id="nozzle-diameter" name="nozzle-diameter" required>
+            </div>
+        </div>
 
-        <button type="submit">✨ Generate AI Function ✨</button>
+        <div class="center-heading">
+            <div class="form-item full-width">
+                <label for="distance" id="distanceLabel">📏 Distance Between Nozzle and Turbine:</label>
+                <input type="number" id="distance" name="distance" required>
+            </div>
+        </div>
+
+        <button type="submit" id="submitButton">✨ Generate AI Function ✨</button>
     </form>
 
     <!-- Loader -->
@@ -69,7 +107,47 @@
         <p>Loading...</p>
     </div>
 
+    <!-- Translation Toggle Button -->
+    <button id="translateButton" onclick="toggleLanguage()">日本語に切り替え</button>
+
     <script>
+        // Translation Logic
+        let currentLanguage = 'en';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ja' : 'en';
+
+            const translations = {
+                en: {
+                    heading: "Provide Experiment Parameters 🚀",
+                    flowRateLabel: "🌊 Flow Rate:",
+                    nozzleDiameterLabel: "🔧 Nozzle Diameter:",
+                    distanceLabel: "📏 Distance Between Nozzle and Turbine:",
+                    submitButton: "✨ Generate AI Function ✨"
+                },
+                ja: {
+                    heading: "実験パラメータを入力 🚀",
+                    flowRateLabel: "🌊 流量:",
+                    nozzleDiameterLabel: "🔧 ノズル径:",
+                    distanceLabel: "📏 ノズルとタービンの距離:",
+                    submitButton: "✨ AI関数を生成 ✨"
+                }
+            };
+
+            // Update text content
+            for (const [key, value] of Object.entries(translations[currentLanguage])) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = value;
+                }
+            }
+
+            // Update toggle button text
+            const translateButton = document.getElementById('translateButton');
+            translateButton.textContent = currentLanguage === 'en' ? '日本語に切り替え' : 'Switch to English';
+        }
+
+        // Form Submission Logic
         document.getElementById('parameters-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
