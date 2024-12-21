@@ -1,0 +1,112 @@
+body {
+    background-color: #121212; /* Dark background */
+    color: #E0E0E0; /* Light text color */
+    font-family: 'Georgia', serif; /* Elegant serif font */
+    line-height: 1.6; /* Improved readability */
+    margin: 0;
+    padding: 0;
+    font-size: 16px; /* Base font size */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
+    font-family: 'M PLUS 1 Code', monospace;
+}
+
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap; /* Ensures images wrap on smaller screens */
+    justify-content: center; /* Center-align images */
+    gap: 20px; /* Adjust spacing between images */
+}
+
+.image-container img {
+    flex: 1 1 auto; /* Make images grow/shrink as needed */
+    max-width: 30%; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.center-heading {
+    text-align: center; /* Centers the text horizontally */
+}
+
+button {
+    background: transparent;
+    border: 2px solid #2196F3;
+    border-radius: 5px;
+    color: #2196F3;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+    margin-top: 20px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #2196F3;
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+button:hover::before {
+    left: 0;
+}
+
+button:hover {
+    color: white;
+}
+
+textarea {
+    width: 100%; /* Allows the textarea to scale with its container */
+    max-width: 600px; /* Sets the maximum width to 600 pixels */
+    min-height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    resize: vertical; /* Allows vertical resizing only */
+}
+
+textarea:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+}
+
+label {
+    display: block; /* Ensures the label occupies the full width */
+    margin-bottom: 8px; /* Adjust the value as needed */
+}
+
+#translateButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.text-container-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Space between elements in the grid */
+}
+
+#parameters-form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+    gap: 20px; /* Add space between child elements (e.g., grids and button) */
+}
+
+
+.form-item {
+    margin-bottom: 20px; /* Space between individual form items */
+}
+

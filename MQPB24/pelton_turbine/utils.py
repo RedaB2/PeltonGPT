@@ -1,5 +1,9 @@
 from openai import OpenAI
 
+import os
+
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
 def get_chat_completion(prompt, model="gpt-4o"):
     """
     Function to get chat completion from OpenAI's API.
