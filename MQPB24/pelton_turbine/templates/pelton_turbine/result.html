@@ -79,8 +79,12 @@
     </div>
 
     <script>
-        // Fetch and display the results
         document.addEventListener('DOMContentLoaded', async function() {
+            // 1. Show the loader or progress bar immediately
+            const loader = document.getElementById('loader');
+            loader.classList.remove('hidden');
+        
+            // 2. Retrieve any saved data for the experiment
             const parameters = JSON.parse(sessionStorage.getItem('experimentParameters'));
             const description = sessionStorage.getItem('experimentDescription');
             
@@ -88,24 +92,26 @@
             console.log('Parameters:', parameters);
             
             try {
-                // Call your backend API
+                // 3. Call your backend API to calculate experiment results
                 const response = await fetch('/api/calculate/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ description, parameters })
                 });
-
+        
                 console.log('Response status:', response.status);
-
+        
                 if (response.ok) {
+                    // 4. Parse and display the results
                     const results = await response.json();
                     console.log('Results:', results);
+        
                     const resultsDiv = document.getElementById('results');
                     resultsDiv.innerHTML = `
-                        <p>Bucket Depth: ${results.bucket_depth}</p>
-                        <p>Bucket Angle: ${results.bucket_angle}</p>
-                        <p>Bucket Spacing: ${results.bucket_spacing}</p>
-                        <p>Nozzle Alignment: ${results.nozzle_alignment}</p>
+                        <p>Bucket Depth: ${results.bucket_depth} mm</p>
+                        <p>Bucket Angle: ${results.bucket_angle} degrees</p>
+                        <p>Bucket Spacing: ${results.bucket_spacing} mm</p>
+                        <p>Nozzle Alignment: ${results.nozzle_alignment} mm</p>
                     `;
                 } else {
                     const errorText = await response.text();
@@ -113,33 +119,37 @@
                 }
             } catch (error) {
                 console.error('Fetch error:', error);
+            } finally {
+                // 5. Hide the loader after results have been fetched or an error occurs
+                loader.classList.add('hidden');
             }
         });
-
-        // Generate AI review and image with loader
+        
+        // Handle AI Review generation
         document.getElementById('generate-review').addEventListener('click', async function() {
-            // Show the loader
+            // 1. Show the loader again
             const loader = document.getElementById('loader');
             loader.classList.remove('hidden');
-
+        
             try {
+                // 2. Call your backend API to generate the AI review
                 const response = await fetch('/api/generate-review/', { method: 'GET' });
                 const reviewData = await response.json();
-
-                // Parse the Markdown into HTML before displaying
+        
+                // 3. Display the AI review and generated image
                 const aiReviewElement = document.getElementById('ai-review');
                 aiReviewElement.innerHTML = marked.parse(reviewData.review);
-
+                
                 document.getElementById('ai-image').src = reviewData.imageUrl;
                 document.getElementById('review-section').style.display = 'block';
             } catch (error) {
                 console.error('Error generating AI review:', error);
             } finally {
-                // Hide the loader
+                // 4. Hide the loader once the AI review is available
                 loader.classList.add('hidden');
             }
         });
-    </script>
+        </script>
     <!-- Include the marked library -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>

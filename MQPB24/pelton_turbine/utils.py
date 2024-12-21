@@ -17,7 +17,7 @@ def get_chat_completion(prompt, model="gpt-4o"):
         model=model,
         messages=[
             {"role": "system", "content": "You are an expert in fluid dynamics and turbomachinery design. You give concise answers and you answer exactly what you are asked. You are also well documented on Pelton turbine that are part of very small scale experiments. You never use markdown. ONLY USE TEXT, PLAINTEXT. You can understand experimental conditions if they are written in Japanese to you."},
-            {"role": "user", "content": f"Using the following experimental description: {prompt}, write a Python function that will calculate the following parameters for a Pelton turbine: bucket depth, bucket angle, bucket spacing and nozzle alignment. The Python function has to take in the following parameters: flow rate, nozzle diameter, distance from nozzle to pelton turbine. The function will then output the bucket depth, bucket angle, bucket spacing and nozzle alignment for us to display in our app. Make sure you only write the function. Nothing else and avoid mardowns or anything. Just plain text as we will directly use this output as a function in our program. The name of the function needs to be calculate_pelton_parameters. The function will return a dictionary with the following keys: bucket_depth, bucket_angle, bucket_spacing, nozzle_alignment."}
+            {"role": "user", "content": f"Using the following experimental description: {prompt}, write a Python function that will calculate the following parameters for a Pelton turbine: bucket depth(meters), bucket angle(degrees), bucket spacing(meters) and nozzle alignment(meters). The Python function has to take in the following parameters: flow rate(liters per second), nozzle diameter(millimeters), distance from nozzle to pelton turbine(millimeters). The function will then output the bucket depth (mm), bucket angle (degrees), bucket spacing (mm) and nozzle alignment (mm) for us to display in our app. Make sure you only write the function. Nothing else and avoid mardowns or anything. Just plain text as we will directly use this output as a function in our program. The name of the function needs to be calculate_pelton_parameters. The function will return a dictionary with the following keys: bucket_depth, bucket_angle, bucket_spacing, nozzle_alignment."}
         ]
     )
     
@@ -59,7 +59,7 @@ def generate_pelton_turbine_image():
     
     response = client.images.generate(
         model="dall-e-3",
-        prompt="A small Pelton Turbine similar to a CAD model.",
+        prompt="Draw a small realistic Pelton Turbine. Maintain the size and scale.",
         size="1024x1024",
         quality="standard",
         n=1,
