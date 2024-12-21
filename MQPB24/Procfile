@@ -1,1 +1,1 @@
-web: gunicorn serene-waters-13421.wsgi
+web: gunicorn MQPB24.wsgi
