@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'pelton_turbine',
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -75,9 +77,7 @@ WSGI_APPLICATION = 'MQPB24.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {}
-}
+DATABASES = {}
 
 MIGRATION_MODULES = {
     app: None for app in INSTALLED_APPS
