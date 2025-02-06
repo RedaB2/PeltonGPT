@@ -49,10 +49,6 @@ The tool assists in analyzing and designing Pelton turbines for small-scale expe
 
 I welcome contributions! Please fork the repository and submit a pull request. For major changes, open an issue first. 🛠️
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 📜
-
 ## 📞 Contact
 
 For any questions, contact me at boutayeb.reda@icloud.com
