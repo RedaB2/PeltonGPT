@@ -2,6 +2,10 @@
 
 This tool provides insights and calculations for Pelton turbine experiments, designed for researchers, engineers, and students. 🧑‍🔬
 
+
+Research paper: https://drive.google.com/file/d/1N3RLLogNNhL1iWtSXPHviJ1AUwXdR_yc/view?usp=sharing
+
+
 ## 🛠️ Tech Stack
 
 - **Python & Django**: Core framework for building the web application. 🐍
